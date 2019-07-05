@@ -1,0 +1,17 @@
+{
+    "dut_file": "./node_modules/signalflip-js/verilog_src/top_elastic.sv",
+    "dut_name": "top_elastic",
+    "waveform_format": "vcd",
+
+    "probe": [ "sig1", "sig2", "sig3"],
+    "sources": [ 
+      		 "cppsrc/main.cpp",
+	"cppsrc/signals.cpp"
+    ],
+    "libraries": [ "/usr/local/share/verilator/include",
+		   "/usr/local/share/verilator/include/vltstd",
+		   "/usr/local/share/verilator/include/gtkwave",
+		   "./obj_dir"
+		   ]
+
+}
