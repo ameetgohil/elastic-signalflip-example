@@ -11,7 +11,7 @@ const assert = require('assert');
 const model = (din_array) => {
     let dout = [];
     while(din_array.length > 0) {
-	dout.push(din_array[0] << 2);
+	dout.push({data: din_array[0].data << 2, isLast: din_array[0].isLast});
 	din_array.shift();
     }
     return dout;
@@ -49,17 +49,20 @@ describe('Basic Group', () => {
 	target = new Elastic(sim, 0, dut.clk, dut.t0_data, dut.t0_valid, dut.t0_ready, null);
 	initiator = new Elastic(sim, 1, dut.clk, dut.i0_data, dut.i0_valid, dut.i0_ready, null);
 	//target.print = true;
-	let din = _.range(10).map(x => x);
+	let din = [];
+	for(let i of _.range(10)) {
+	    din.push({data: i, isLast: false});
+	}
 	target.txArray = din.slice();
 	sim.addTask(() => {
 	    let dout = model(din.slice());
 	    //		    assert(_.isEqual(dout, initiator.rxArray));
 	    
 	    
-	    dout.map((x,i) => {
+	    /*dout.map((x,i) => {
 		if(x != initiator.rxArray[i])
 		    console.log('x: ', x, ' i: ', i, 'initiator[i]: ', initiator.rxArray[i]);
-	    });
+	    });*/
 
 	    try{
 		assert.deepEqual(dout, initiator.rxArray);
