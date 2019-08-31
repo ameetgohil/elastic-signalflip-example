@@ -24,15 +24,7 @@ describe('Basic Group', () => {
     beforeEach(() => {
 	// set up the environment
 	dut.init(); // Init dut
-	sim = new Sim(dut, dut.eval);
-
-	/*const init = () => {
-	    dut.t0_data(0);
-	    dut.t0_valid(0);
-	    dut.clk(0);
-	    dut.rstf(0);
-	};
-	init();*/
+	sim = new Sim(dut);
 
 	function* reset() {
 	    dut.rstf(0);
